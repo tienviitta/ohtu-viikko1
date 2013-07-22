@@ -47,12 +47,46 @@ public class VarastoTest {
     }
 
     @Test
+    public void lisaysLisaaNegatiivinen() {
+        varasto.lisaaVarastoon(-8);
+
+        // saldon pitäisi olla nolla
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void lisaysLisaaYliTilavuuden() {
+        varasto.lisaaVarastoon(18);
+
+        // saldon pitäisi olla nolla
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
     public void ottaminenPalauttaaOikeanMaaran() {
         varasto.lisaaVarastoon(8);
 
         double saatuMaara = varasto.otaVarastosta(2);
 
         assertEquals(2, saatuMaara, vertailuTarkkuus);
+    }
+
+    @Test
+    public void ottaminenNegatiivinen() {
+        varasto.lisaaVarastoon(8);
+
+        double saatuMaara = varasto.otaVarastosta(-2);
+
+        assertEquals(0, saatuMaara, vertailuTarkkuus);
+    }
+
+    @Test
+    public void ottaminenYliSaldon() {
+        varasto.lisaaVarastoon(8);
+
+        double saatuMaara = varasto.otaVarastosta(12);
+
+        assertEquals(8, saatuMaara, vertailuTarkkuus);
     }
 
     @Test
